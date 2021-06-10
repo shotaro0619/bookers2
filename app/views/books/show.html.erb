@@ -1,47 +1,44 @@
 <main>
-     <p id="notice"></p>
-     <div class="container px-5 px-sm-0">
+    <p id="notice"></p>
+    <div class="container px-5 px-sm-0">
        <div class="row">
          <div class="col-md-3">
-          <%= render 'books/list', user: @user %>
-         <h2>New book</h2>
-          <%= form_with model: @book, local:true do |f| %>
-            <label>Title</label><br>
-            <%= f.text_field :title %><br>
-            <label>Opinion</label><br>
-            <%= f.text_area :body %><br>
-            <%= f.submit 'Create Book', class:"btn btn-success" %>
-          <% end %>
+            <%= render 'books/list', user: @user %>
+           <h2>New book</h2>
+            <%= form_with model: @book, local:true do |f| %>
+              <label>Title</label><br>
+              <%= f.text_field :title %><br>
+              <label>Opinion</label><br>
+              <%= f.text_area :body %><br>
+              <%= f.submit 'Create Book', class:"btn btn-success" %>
+            <% end %>
           </div>
-
-        <div class="col-md-8 offset-md-1">
-          <h2>Book datail</h2>
-
-          <table class="table">
-               <tbody>
-                 <tr>
-                  <td>
-                    　<%= link_to user_path(@user.id) do %>
-                      　<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %> <br>
-                      <% end %>
-                      <%= link_to @user.name, user_path(@user.id) %>
-
-                  </td>
-                  <td><%= link_to @books.title %></td>
-                  <td><%= @books.body %></td>
-                  <td>
-                      <% if @books.user == current_user %>
-                       <%= link_to "Edit", edit_book_path(@books.id), class:"btn btn-sm btn-success" %>
-                      <% end %>
-                  </td>
-                  <td><% if @books.user == current_user %>
-                       <%= link_to "Destroy", book_path(@books), class:"btn btn-sm btn-danger", method: :delete %>
-                      <% end %>
-                  </td>
-                 </tr>
-               </tbody>
-           </table>
+          <div class="col-md-8 offset-md-1">
+            <h2>Book datail</h2>
+            <table class="table">
+                 <tbody>
+                   <tr>
+                    <td>
+                      　<%= link_to user_path(@user.id) do %>
+                        　<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %> <br>
+                          <%= @user.name %>
+                        <% end %>
+                    </td>
+                    <td><%= link_to @books.title %></td>
+                    <td><%= @books.body %></td>
+                    <td>
+                        <% if @books.user == current_user %>
+                         <%= link_to "Edit", edit_book_path(@books.id), class:"btn btn-sm btn-success" %>
+                        <% end %>
+                    </td>
+                    <td><% if @books.user == current_user %>
+                         <%= link_to "Destroy", book_path(@books), class:"btn btn-sm btn-danger", method: :delete %>
+                        <% end %>
+                    </td>
+                   </tr>
+                 </tbody>
+             </table>
          </div>
       </div>
-     </div>
+    </div>
 </main>

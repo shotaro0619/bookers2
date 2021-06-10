@@ -1,30 +1,38 @@
 <main>
- <p id="notice"></p>
- <div class="container">
-  <div class="row">
+  <p id="notice"></p>
+  <div class="container">
+   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>User info</h2>
-      <%= form_with model:@user, local:true do |f| %>
-       <div class="form-group">
-        <label for="inputName">Name</label>
-        <%= f.text_field :name, autofocus: true, id:"inputName", class:"form-control name"%>
-       </div>
-       <div class="form-group">
-        <%= attachment_image_tag @user, :profile_image, :fill, 60, 60 %>
-        <label for="inputImage">Image</label>
-        <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class:"form-control-file user_image"%>
-        </div>
-        
-        <div class="form-group">
-          <label for="inputIntroduction">Introduction</label>
-          <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", class:"form-control introduction"%>
-        </div>
-        
-        <div class="form-group">
-        <%= f.submit "Update User", class:"btn btn-secondary"%>
-        </div>
-      <% end %>
+     <h2>User info</h2>
+     
+     <%if @user.errors.any? %>
+    <div class="error_explanation">
+      <h3><%= @user.errors.count %>&nbsp;error prohibited this obj from being saved: </h3>
+        <ul class="error-list">
+         <li>Name is too short (minimum is 2 characters)</li>
+        </ul>
+    </div>
+    
+  <% end %>
+     <%= form_with model:@user, local:true do |f| %>
+      <div class="form-group">
+       <label for="inputName">Name</label>
+       <%= f.text_field :name, autofocus: true, id:"inputName", class:"form-control name"%>
+      </div>
+      <div class="form-group">
+       <%= attachment_image_tag @user, :profile_image, :fill, 60, 60 %>
+       <label for="inputImage">Image</label>
+       <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class:"form-control-file user_image"%>
+      </div>
+      <div class="form-group">
+       <label for="inputIntroduction">Introduction</label>
+       <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", class:"form-control introduction"%>
+      </div>
+      <div class="form-group">
+       <%= f.submit "Update User", class:"btn btn-secondary"%>
+      </div>
+     <% end %>
+    </div>
    </div>
   </div>
- </div>
 </main>

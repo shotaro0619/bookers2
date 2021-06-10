@@ -1,16 +1,16 @@
-<%if @book.errors.any? %>
-    <div class="error_explanation">
-      <h2><%= @book.errors.count %>&nbsp;error prohibited this book from being saved: </h2>
-        <ul class="error-list">
-           <% @book.errors.full_messages.each do |msg| %>
-               <li><%= msg %></li>
-           <% end %>
-        </ul>
-    </div>
-  <% end %>
 <main>
      <p id="notice"></p>
      <div class="container px-5 px-sm-0">
+       <%if @book.errors.any? %>
+         <div class="error_explanation">
+            <h3><%= @book.errors.count %>&nbsp;error prohibited this obj from being saved: </h3>
+              <ul class="error-list">
+               <% @book.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+               <% end %>
+              </ul>
+          </div>
+        <% end %>
        <div class="row">
          <div class="col-md-3">
           <%= render 'books/list', user: @user %>
@@ -23,8 +23,6 @@
             <%= f.submit 'Create Book', class:"btn btn-success" %>
           <% end %>
           </div>
-
-
             <div class="col-md-8 offset-md-1">
               <h2>Books</h2>
               <table class="table table-hover table-inverse">
