@@ -24,30 +24,52 @@
           <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
 
-              <li class="nav-item"><i class="fas fa-home"></i><%= link_to "Home",  user_path(current_user.id), class:"text-light" %></li>
+              <li class="nav-item">
+               <%= link_to user_path(current_user.id), class:"text-light" do %>
+                <i class="fas fa-home">Home</i>
+               <% end %>
+              </li>
 
-              <li class="nav-item"><i class="fas fa-users"></i><%= link_to "Users", users_path, class:"text-light" %></li>
+              <li class="nav-item">
+                <%= link_to users_path, class:"text-light" do %>
+                 <i class="fas fa-users">Users</i>
+                <% end %>
+              </li>
 
-              <li class="nav-item"><i class="fas fa-book-open"></i><%= link_to "Books", books_path, class:"text-light" %></li>
+              <li class="nav-item">
+                <%= link_to books_path, class:"text-light" do %>
+                 <i class="fas fa-book-open">Books</i>
+                <% end %>
+              </li>
 
-              <li class="nav-item"><i class="fas fa-sign-out-alt"></i>
-                <%= link_to "logout", destroy_user_session_path, class:"text-light", method: :delete %>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, class:"text-light", method: :delete  do %>
+                 <i class="fas fa-sign-out-alt">logout</i>
+                <% end %>
               </li>
             <% else %>
 
-              <li class="nav-item"><i class="fas fa-home"></i>
-                <%= link_to "Home", root_path, class:"text-light" %>
+              <li class="nav-item">
+                <%= link_to root_path, class:"text-light" do %>
+                 <i class="fas fa-home">Home</i>
+                <% end %>
               </li>
 
-              <li class="nav-item"><i class="fas fa-link"></i>
-                <%= link_to "About", about_path, class:"text-light" %>
+              <li class="nav-item">
+                <%= link_to "/home/about", class:"text-light" do %>
+                 <i class="fas fa-link">About</i>
+                <% end %>
               </li>
 
-              <li class="nav-item"><i class="fas fa-user-plus"></i>
-                <%= link_to "sign up", new_user_registration_path, class:"text-light" %>
+              <li class="nav-item">
+                <%= link_to new_user_registration_path, class:"text-light" do %>
+                 <i class="fas fa-user-plus">sign up</i>
+                <% end %>
               </li>
-              <li class="nav-item"><i class="fas fa-sign-out-alt"></i>
-                <%= link_to "login", new_user_session_path, class:"text-light" %>
+              <li class="nav-item">
+                <%= link_to new_user_session_path, class:"text-light" do %>
+                 <i class="fas fa-sign-out-alt">log in</i>
+                <% end %>
               </li>
             <% end %>
          </ul>
@@ -55,7 +77,7 @@
       </nav>
      </header>
 
-    
+
     <div class="flash-success"><%= flash[:notice] %></div>
     <%= yield %>
 
