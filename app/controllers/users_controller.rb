@@ -15,8 +15,13 @@ class UsersController < ApplicationController
  end
 
  def edit
-   @users = User.new
+   # @users = User.new
    @user = User.find(params[:id])
+   # if @book.user == current_user
+   #   render "edit"
+   # else
+   #   redirect_to user_path(current_user.id)
+   # end
  end
 
  def update
@@ -28,11 +33,6 @@ class UsersController < ApplicationController
      render :edit
     end
  end
-
- def create
-
- end
-
 
 private
 

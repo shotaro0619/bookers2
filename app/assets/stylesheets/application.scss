@@ -47,3 +47,24 @@ h3 {
 #error_explanation {
   color: red;
 }
+
+table {
+  padding: 0.75em;
+}
+
+.nav-item {
+  margin: 10px;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-top: 0;
+}
+
+.userList {
+  text-decoration: none;
+}

@@ -4,16 +4,17 @@
    <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
      <h2>User info</h2>
-     
+
      <%if @user.errors.any? %>
-    <div class="error_explanation">
-      <h3><%= @user.errors.count %>&nbsp;error prohibited this obj from being saved: </h3>
-        <ul class="error-list">
-         <li>Name is too short (minimum is 2 characters)</li>
-        </ul>
-    </div>
-    
-  <% end %>
+         <div class="error_explanation">
+            <h3><%= @user.errors.count %>&nbsp;error prohibited this obj from being saved: </h3>
+              <ul class="error-list">
+               <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+               <% end %>
+              </ul>
+          </div>
+        <% end %>
      <%= form_with model:@user, local:true do |f| %>
       <div class="form-group">
        <label for="inputName">Name</label>
