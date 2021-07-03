@@ -48,13 +48,13 @@
                      <% if book.favorited_by?(current_user) %>
                       <p>
                         <%= link_to book_favorites_path(book), method: :delete do %>
-                         ♥<%= book.favorites.count %>
+                         <span class="fa fa-heart like-btn-unlike"><%= book.favorites.count %></span>
                         <% end %>
                       </p>
                     <% else %>
                        <p>
                         <%= link_to book_favorites_path(book), method: :post do %>
-                          <span class="favo-color">♡<%= book.favorites.count %></span>
+                          <span class="fa fa-heart like-btn"><%= book.favorites.count %></span>
                          <% end %>
                         </p>
                      <% end %>

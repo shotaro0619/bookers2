@@ -30,13 +30,13 @@
                         <% if @book.favorited_by?(current_user) %>
                       <p>
                         <%= link_to book_favorites_path(@book), method: :delete do %>
-                         ♥<%= @book.favorites.count %>
+                         <span class="fa fa-heart like-btn-unlike"><%= @book.favorites.count %></span>
                         <% end %>
                       </p>
                     <% else %>
                        <p class="favo-color">
                         <%= link_to book_favorites_path(@book), method: :post do %>
-                          ♡<%= @book.favorites.count %>
+                          <span class="fa fa-heart like-btn"><%= @book.favorites.count %></span>
                          <% end %>
                         </p>
                      <% end %>
@@ -54,21 +54,30 @@
                    </tr>
                  </tbody>
                 </table>
+                <table>
                     <% @book.post_comments.each do |post_comment| %>
                     <div class="comments">
-                      <%= attachment_image_tag post_comment.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %> <br>
-                      <%= @user.name %>
-                      <%= post_comment.comment %>
+                      <tr>
+                      <td>
+                       <%= attachment_image_tag post_comment.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %> <br>
+                       <%= @user.name %>
+                       <td>
+                      <td>
+                        <%= post_comment.comment %>
+                       </td>
                       <% if post_comment.user == current_user %>
+
                         <div class="comment-delete">
-                        <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), class:"btn btn-danger", method: :delete %>
+                        <td><%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), class:"btn btn-danger", method: :delete %>
                         </div>
                       <% end %>
+                      </tr>
                       <% end %>
                     </div>
+                 </table>
                   <div class="new-comment">
                    <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-                    <%= f.text_area :comment, class:"form-control" %>
+                    <%= f.text_area :comment, size:"90x5" %>
                     <%= f.submit "送信" %>
                    <% end %>
                  </div>
