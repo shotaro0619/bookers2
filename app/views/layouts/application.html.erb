@@ -1,95 +1,104 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bookers2</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="https://kit.fontawesome.com/*******.js" crossorigin="anonymous"></script>
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <head>
+      <title>Bookers2</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <script src="https://kit.fontawesome.com/*******.js" crossorigin="anonymous"></script>
+      <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-  <body>
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class= "container">
-        <%= link_to "Bookers", root_path, class: "navbar-brand" %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-              <li class="nav-item active">
-                <%= link_to user_path(current_user), class: "nav-link" do %>
-                  <i class="fas fa-home"></i>
-                    Home
-                <% end %>
-              </li>
-              <li class="nav-item active">
-                <%= link_to users_path, class: "nav-link" do %>
-                  <i class="fas fa-users"></i>
-                   Users
-                <% end %>
-              </li>
-              <li class="nav-item active">
-                <%= link_to books_path, class: "nav-link" do  %>
-                  <i class="fas fa-book-open"></i>
-                   Books
-                <% end %>
-              </li>
-              <li class="nav-item active">
-                <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-                  <i class="fas fa-sign-out-alt"></i>
-                   logout
-                <% end %>
-              </li>
-            <% else %>
-              <li class="nav-item active">
-                <%= link_to root_path, class: "nav-link" do %>
-                  <i class="fas fa-home"></i>
-                   Home
-                <% end %>
-              </li>
-              <li class="nav-item active">
-                <%= link_to home_about_path, class: "nav-link" do %>
-                  <i class="fas fa-link"></i>
-                   About
-                <% end %>
-              </li>
-              <li class="nav-item active">
-                <%= link_to new_user_registration_path, class: "nav-link" do %>
-                  <i class="fas fa-user-plus"></i>
-                   sign up
-                <% end %>
-              </li>
-              <li class="nav-item active">
-                <%= link_to new_user_session_path, class: "nav-link" do %>
-                  <i class="fas fa-sign-in-alt"></i>
-                   login
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
+    <body>
+       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class= "container">
+          <%= link_to "Bookers", root_path, class: "navbar-brand" %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item active">
+                  <%= link_to user_path(current_user), class: "nav-link" do %>
+                    <i class="fas fa-home"></i>
+                      Home
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to users_path, class: "nav-link" do %>
+                    <i class="fas fa-users"></i>
+                     Users
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to books_path, class: "nav-link" do  %>
+                    <i class="fas fa-book-open"></i>
+                     Books
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
+                    <i class="fas fa-sign-out-alt"></i>
+                     logout
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item active">
+                  <%= link_to root_path, class: "nav-link" do %>
+                    <i class="fas fa-home"></i>
+                     Home
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to home_about_path, class: "nav-link" do %>
+                    <i class="fas fa-link"></i>
+                     About
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to new_user_registration_path, class: "nav-link" do %>
+                    <i class="fas fa-user-plus"></i>
+                     sign up
+                  <% end %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to new_user_session_path, class: "nav-link" do %>
+                    <i class="fas fa-sign-in-alt"></i>
+                     login
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
+      </nav>
+    </body>
+      <div class="container">
+          <div class="col-xs-6 col-xs-offset-3 text-center" style="margin-top: 25px;">
+            <% if user_signed_in? %>
+              <%= form_with url:search_path, method: :get, local: true do |f| %>
+                <%= f.text_field 'search[value]' %>
+                <%= f.select 'search[model]', options_for_select({ "User" => "user", "Book" => "book" }) %>
+                <%= f.select 'search[how]', options_for_select({ "完全一致" => "perfect_match", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partical"  }) %>
+                <%= f.submit :"検索" %>
+              <% end %>
+            <% end %>
+          </div>
       </div>
-    </nav>
-
-
-    <div class="flash-success"><%= flash[:notice] %></div>
-    <%= yield %>
-
-    <footer>
-       <div class="container mt-5">
-         <div class="row">
-           <div class="mx-auto">
-            <p>CopyRight Infratop.inc</p>
+      
+      <div class="flash-success"><%= flash[:notice] %></div>
+      
+      <%= yield %>
+      <footer>
+         <div class="container mt-5">
+           <div class="row">
+             <div class="mx-auto">
+              <p>CopyRight Infratop.inc</p>
+             </div>
            </div>
          </div>
-       </div>
-
-     </footer>
-
-  </body>
+       </footer>
 </html>
