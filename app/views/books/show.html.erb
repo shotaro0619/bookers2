@@ -12,25 +12,25 @@
                   <%= f.text_area :body %><br>
                   <%= f.submit 'Create Book', class:"btn btn-success" %>
                 <% end %>
-          　</div>
+            </div>
           <div class="col-md-8 offset-md-1">
                <h2>Book detail</h2>
                 <table class="table">
                  <tbody>
                    <tr>
                     <td>
-                      　<%= link_to user_path(@user.id) do %>
-                        　<%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %> <br>
+                        <%= link_to user_path(@user.id) do %>
+                          <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %> <br>
                           <%= @user.name %>
                         <% end %>
                     </td>
                     <td><%= link_to @book.title %></td>
                     <td><%= @book.body %></td>
-                    
-                    <td class="favorite-btn">
+
+                    <td id="book_<%= @book.id %>">
                         <%= render 'favorites/favorite-btn', book:@book %>
                     </td>
-                    <td><p>コメント数：<%= @book.post_comments.count %></p></td>
+                    <td><p>コメント数：<%= @book.book_comments.count %></p></td>
                     <td>
                         <% if @book.user == current_user %>
                          <%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %>
@@ -43,32 +43,11 @@
                    </tr>
                  </tbody>
                 </table>
-                <table>
-                    <% @book.post_comments.each do |post_comment| %>
-                    <div class="comments">
-                      <tr>
-                      <td>
-                       <%= attachment_image_tag post_comment.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %> <br>
-                       <%= @user.name %>
-                       <td>
-                      <td>
-                        <%= post_comment.comment %>
-                       </td>
-                      <% if post_comment.user == current_user %>
-
-                        <div class="comment-delete">
-                        <td><%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), class:"btn btn-danger", method: :delete %>
-                        </div>
-                      <% end %>
-                      </tr>
-                      <% end %>
-                    </div>
-                 </table>
-                  <div class="new-comment">
-                   <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-                    <%= f.text_area :comment, size:"90x5" %>
-                    <%= f.submit "送信" %>
-                   <% end %>
+                <table id="book_delete">
+                    <%= render partial: 'book_comments/book-delete', locals:{ book: @book, user: @user } %>
+                </table>
+                  <div id="book_comment">
+                   <%= render partial: 'book_comments/book-comment', locals:{ book: @book, book_comment: @book_comment } %>
                  </div>
             </div>
         </div>
