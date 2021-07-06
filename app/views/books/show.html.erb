@@ -29,16 +29,18 @@
 
                     <td id="book_<%= @book.id %>">
                         <%= render 'favorites/favorite-btn', book:@book %>
-                    </td>
-                    <td><p>コメント数：<%= @book.book_comments.count %></p></td>
-                    <td>
+                    
+                         <td id="comments-count">コメント数：<%= @book.book_comments.count %></td>
+                      <td>
                         <% if @book.user == current_user %>
                          <%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %>
                         <% end %>
-                    </td>
-                    <td><% if @book.user == current_user %>
+                      </td>
+                      <td>
+                        <% if @book.user == current_user %>
                          <%= link_to "Destroy", book_path(@book), class:"btn btn-sm btn-danger", method: :delete %>
                         <% end %>
+                      </td>  
                     </td>
                    </tr>
                  </tbody>
