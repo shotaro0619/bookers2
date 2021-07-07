@@ -3,7 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+  
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  
   has_many :books, dependent: :destroy
   attachment :profile_image
   validates :name, presence: true, length: { in: 2..20 }
@@ -11,7 +14,7 @@ class User < ApplicationRecord
   validates :name, uniqueness: true
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-
+  has_many :favorited_books, through: :favorites, source: :user
 
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower

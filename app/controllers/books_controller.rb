@@ -2,8 +2,11 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.all
+    # @books = Book.all
+    @books = Book.where(:created_at=> 6.months.ago..Time.now).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
     @user = current_user
+    # @all_ranks = Book.find(Favorite.group(:book_id).order('count(book_id) desc').pluck(:book_id))
+
   end
 
   def create
@@ -52,6 +55,10 @@ class BooksController < ApplicationController
     @books.destroy
     redirect_to books_path
   end
+
+  # def weekly_rank
+  #   @ranks = Book.last_week
+  # end
 
   private
 

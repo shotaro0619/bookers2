@@ -4,6 +4,7 @@
        <div class="row">
             <div class="col-md-3">
                 <%= render 'books/list', user: @user %>
+              
                <h2>New book</h2>
                 <%= form_with model: @book_new, local:true do |f| %>
                   <label>Title</label><br>

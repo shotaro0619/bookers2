@@ -20,17 +20,29 @@
           <th><%= link_to user.followers.count, user_followers_path(user) %></th>
         </tr>
    </table>
-      <% if user.id == current_user.id %>
-        <%= link_to edit_user_path(user) ,class:"btn btn-outline-secondary btn-block", method: :get do %>
-         <i class="fas fa-user-cog"></i>
-        <% end %>
-      <% end %>
-
-      <% if user.id != current_user.id %>
-         <% if current_user.following?(user) %>
-           <%= link_to "フォロー外す", user_relationships_path(user.id),class:"btn btn-info", method: :delete %>
-          <% else %>
-           <%= link_to "フォローする", user_relationships_path(user.id),class:"btn btn-success", method: :post %>
+   <table>
+      <tr>
+        <% if user.id == current_user.id %>
+            <%= link_to edit_user_path(user) ,class:"btn btn-outline-secondary btn-block", method: :get do %>
+             <i class="fas fa-user-cog"></i>
+            <% end %>
           <% end %>
-      <% end %>
+          <% if user.id != current_user.id %>
+             <% if current_user.following?(user) %>
+               <%= link_to "フォロー外す", user_relationships_path(user.id),class:"btn btn-info", method: :delete %>
+              <% else %>
+               <%= link_to "フォローする", user_relationships_path(user.id),class:"btn btn-success", method: :post %>
+              <% end %>
+          <% end %>
+        <%# if (current_user.followed_ids? @user) && (@user.followed_ids? current_user)  %>
+    　      <% if @user.id == current_user.id %>
+           <% else %>
+              <% if @isRoom == true %>
+                <%= link_to "チャットへ", room_path,class:"btn btn-outline-success" %>
+                <!--<p class="ml-3"><a href="/rooms/<%#= @roomId %>">チャットへ</a></p>-->
+                <% end %>
+            <% end %>
+        <%# end %>
+       </tr>
+    </table>
 </div>
