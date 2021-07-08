@@ -4,7 +4,7 @@
        <div class="row">
             <div class="col-md-3">
                 <%= render 'books/list', user: @user %>
-              
+
                <h2>New book</h2>
                 <%= form_with model: @book_new, local:true do |f| %>
                   <label>Title</label><br>
@@ -30,8 +30,10 @@
 
                     <td id="book_<%= @book.id %>">
                         <%= render 'favorites/favorite-btn', book:@book %>
-                    
+
                          <td id="comments-count">コメント数：<%= @book.book_comments.count %></td>
+
+                         <td>閲覧数：<%= @book.impressions_count %> </td>
                       <td>
                         <% if @book.user == current_user %>
                          <%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %>
@@ -41,7 +43,7 @@
                         <% if @book.user == current_user %>
                          <%= link_to "Destroy", book_path(@book), class:"btn btn-sm btn-danger", method: :delete %>
                         <% end %>
-                      </td>  
+                      </td>
                     </td>
                    </tr>
                  </tbody>

@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-
+is_impressionable counter_cache: true
   belongs_to :user
 
   validates :title, presence: true
@@ -13,8 +13,5 @@ class Book < ApplicationRecord
   end
 
 
-  # def self.last_week
-  #   Book.joins(:favorites).where(favorites: { created_at:　0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:book_id).order("count(*) desc")
-  # end
 
 end
