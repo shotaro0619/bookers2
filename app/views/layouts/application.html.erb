@@ -45,6 +45,16 @@
                      logout
                   <% end %>
                 </li>
+                <li class="nav-item active">
+                  <% if user_signed_in? %>
+                    <%= form_with url:search_path, method: :get, local: true do |f| %>
+                      <%= f.text_field :value %>
+                      <%= f.select :model, options_for_select({ "User" => "user", "Category" => "book" }) %>
+                      <%= f.select :how, options_for_select({ "完全一致" => "perfect_match", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partical" }) %>
+                      <%= f.submit :"検索", class: "btn btn-primary" %>
+                    <% end %>
+                  <% end %>
+                </li>
               <% else %>
                 <li class="nav-item active">
                   <%= link_to root_path, class: "nav-link" do %>
@@ -76,21 +86,10 @@
         </div>
       </nav>
     </body>
-      <div class="container">
-          <div class="col-xs-6 col-xs-offset-3 text-center" style="margin-top: 25px;">
-            <% if user_signed_in? %>
-              <%= form_with url:search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :value %>
-                <%= f.select :model, options_for_select({ "User" => "user", "Book" => "book" }) %>
-                <%= f.select :how, options_for_select({ "完全一致" => "perfect_match", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partical"  }) %>
-                <%= f.submit :"検索" %>
-              <% end %>
-            <% end %>
-          </div>
-      </div>
-      
+
+
       <div class="flash-success"><%= flash[:notice] %></div>
-      
+
       <%= yield %>
       <footer>
          <div class="container mt-5">

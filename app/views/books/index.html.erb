@@ -14,14 +14,7 @@
        <div class="row">
          <div class="col-md-3">
            <%= render 'books/list', user: @user %>
-            <h2>New book</h2>
-            <%= form_with model: @book, local:true do |f| %>
-             <label>Title</label><br>
-             <%= f.text_field :title %><br>
-             <label>Opinion</label><br>
-             <%= f.text_area :body %><br>
-             <%= f.submit 'Create Book', class:"btn btn-success" %>
-             <% end %>
+           <%= render 'books/form', book_new: @book %>
          </div>
             <div class="col-md-8 offset-md-1">
               <h2>Books</h2>
@@ -31,6 +24,7 @@
                     <th></th>
                     <th>Title</th>
                     <th>Opinion</th>
+                    <th>Category</th>
                     <th colspan="3"></th>
                   </tr>
                 </thead>
@@ -44,12 +38,13 @@
                     </td>
                     <td><%= link_to book.title, book %></td>
                     <td><%= book.body %></td>
+                    <td><%= book.category %></td>
 
                     <td id="book_<%= book.id %>">
                      <%= render 'favorites/favorite-btn', book: book %>
                     </td>
                     <td>コメント数：<%= book.book_comments.count %></td>
-                    <td>閲覧数：</td>
+                    <td>閲覧数：<%= book.impressions_count %></td>
                   </tr>
                   <% end %>
                 </tbody>

@@ -13,7 +13,7 @@ class SearchController < ApplicationController
     if model == 'user'
       User.where(name: value)
     elsif model == 'book'
-      Book.where(title: value)
+      Book.where(category: value)
     end
   end
 
@@ -21,7 +21,7 @@ class SearchController < ApplicationController
     if model == 'user'
       User.where("name LIKE ?", "#{value}%")
     elsif model == 'book'
-      Book.where("title LIKE ?", "#{value}%")
+      Book.where("category LIKE ?", "#{value}%")
     end
   end
 
@@ -29,7 +29,7 @@ class SearchController < ApplicationController
     if model == 'user'
       User.where("name LIKE ?", "%#{value}")
     elsif model == 'book'
-      Book.where("title LIKE ?", "%#{value}")
+      Book.where("category LIKE ?", "%#{value}")
     end
   end
 
@@ -37,7 +37,7 @@ class SearchController < ApplicationController
     if model == 'user'
       User.where("name LIKE ?", "%#{value}%")
     elsif model == 'book'
-      Book.where("title LIKE ?", "%#{value}%")
+      Book.where("category LIKE ?", "%#{value}%")
     end
   end
 

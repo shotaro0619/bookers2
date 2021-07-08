@@ -4,19 +4,24 @@
        <div class="row">
             <div class="col-md-3">
                 <%= render 'books/list', user: @user %>
-
-               <h2>New book</h2>
-                <%= form_with model: @book_new, local:true do |f| %>
-                  <label>Title</label><br>
-                  <%= f.text_field :title %><br>
-                  <label>Opinion</label><br>
-                  <%= f.text_area :body %><br>
-                  <%= f.submit 'Create Book', class:"btn btn-success" %>
-                <% end %>
+                <%= render 'books/form', book_new: @book_new %>
             </div>
           <div class="col-md-8 offset-md-1">
                <h2>Book detail</h2>
-                <table class="table">
+               <table class="table">
+                   <thead class="thead-light">
+                       <tr>
+                         <th>Name</th>
+                         <th>Title</th>
+                         <th>Opinion</th>
+                         <th>Category</th>
+                         <th></th>
+                         <th></th>
+                         <th></th>
+                         <th></th>
+                         <th></th>
+                       </tr>
+                   </thead>
                  <tbody>
                    <tr>
                     <td>
@@ -27,6 +32,7 @@
                     </td>
                     <td><%= link_to @book.title %></td>
                     <td><%= @book.body %></td>
+                    <td><%= @book.category %></td>
 
                     <td id="book_<%= @book.id %>">
                         <%= render 'favorites/favorite-btn', book:@book %>

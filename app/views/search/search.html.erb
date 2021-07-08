@@ -26,13 +26,14 @@
         </tbody>
     <% end %>
     <% elsif @model == "book" %>
-    <h2>Books search for '<%= @value %>'</h2>
+    <h2>category search for '<%= @value %>'</h2>
     <table class="table">
         <thead>
             <tr>
                 <th></th>
                 <th>Title</th>
                 <th>Opinion</th>
+                <th>Category</th>
             </tr>
         </thead>
         <% @datas.each do |book| %>
@@ -47,9 +48,15 @@
                 <td>
                     <%= book.body %>
                 </td>
+                <td>
+                    
+                    <%= book.category %>
+                    
+                </td>
             </tr>
         </tbody>
         <% end %>
+
     <% end %>
     </table>
   </div>
