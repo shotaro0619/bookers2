@@ -4,14 +4,7 @@
           <div class="row">
                    <div class="col-md-3">
                      <%= render 'books/list', user: @user %>
-                       <h2>New book</h2>
-                        <%= form_with model: @book, local:true do |f| %>
-                          <label>Title</label><br>
-                          <%= f.text_field :title %><br>
-                          <label>Opinion</label><br>
-                          <%= f.text_area :body %><br>
-                          <%= f.submit 'Create Book', class:"btn btn-success" %>
-                        <% end %>
+                     <%= render 'books/form', book_new: @book %>
                    </div>
                    <div class="col-md-8 offset-md-1">
                        <h2>Users</h2>

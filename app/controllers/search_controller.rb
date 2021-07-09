@@ -4,7 +4,7 @@ class SearchController < ApplicationController
     @value = params[:value]
     @model = params[:model]
     @how = params[:how]
-    @datas = search_for(@how, @model, @value)
+    @datas = search_for('partical', @model, @value)
   end
 
    private

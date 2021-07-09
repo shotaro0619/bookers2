@@ -34,12 +34,23 @@
                <%= link_to "フォローする", user_relationships_path(user.id),class:"btn btn-success", method: :post %>
               <% end %>
           <% end %>
-          <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+
+
+          <% unless @user.id == current_user.id %>
+              <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
               <% if @isRoom == true %>
                 <%= link_to "チャットへ", room_path(@roomId),class:"btn btn-outline-success" %>
-              <% end %>
               <%#= link_to 'chatを始める', messages_path(user.id), class: "ml-3" %>
-          <% end %>
+              <% else %>
+                <%= form_with model: @room, local: true do |f| %>
+                  <%= fields_for @entry do |e| %>
+                    <%= e.hidden_field :user_id, value: @user.id %>
+                  <% end %>
+                  <%= f.submit "チャットを始める", class:"btn-sm btn-outline-primary"%>
+                <% end %>
+              <% end %>
+              <% end %>
+            <% end %>
        </tr>
     </table>
   </div>
