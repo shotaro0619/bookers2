@@ -1,6 +1,6 @@
 <div class="profile-container">
-   <h2>User info</h2>
-    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+   <h2 class="text-center">User info</h2>
+    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg",class:"d-block mx-auto mb-2" %>
    <table class="table">
         <tr></tr>
         <tr>
@@ -36,19 +36,11 @@
           <% end %>
 
 
-          <% unless @user.id == current_user.id %>
+          <%# unless @user.id == current_user.id %>
               <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
               <% if @isRoom == true %>
                 <%= link_to "チャットへ", room_path(@roomId),class:"btn btn-outline-success" %>
               <%#= link_to 'chatを始める', messages_path(user.id), class: "ml-3" %>
-              <% else %>
-                <%= form_with model: @room, local: true do |f| %>
-                  <%= fields_for @entry do |e| %>
-                    <%= e.hidden_field :user_id, value: @user.id %>
-                  <% end %>
-                  <%= f.submit "チャットを始める", class:"btn-sm btn-outline-primary"%>
-                <% end %>
-              <% end %>
               <% end %>
             <% end %>
        </tr>

@@ -2,11 +2,22 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.where(:created_at=> 6.months.ago..Time.now).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    # if params[:option] == "A" || params[:option] == nil
+    @books = Book.where(:created_at=> 6.weeks.ago..Time.now).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    # elsif params[:option] == "B"
+    # @books = Book.all.order(created_at: :desc)
+  # end
     @user = current_user
-    @books_all = Book.all
-
-
+    # @books_all = Book.all
+    @books_search= Book.all.order(params[:sort])
+  end
+  
+  def sort
+    @books = Book.all.order(created_at: :desc)
+  end
+  
+  def like
+    @books = Book.where(:created_at=> 6.weeks.ago..Time.now).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
   end
 
   def create
@@ -28,7 +39,26 @@ class BooksController < ApplicationController
     impressionist(@book, nil, unique: [:ip_address])
     @user = @book.user
     @book_comment = BookComment.new
+    # @user_me = current_user
+    @currentUserEntry=Entry.where(user_id: current_user.id)
+    @userEntry=Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+          @currentUserEntry.each do |cu|
+            @userEntry.each do |u|
+              if cu.room_id == u.room_id then
+                @isRoom = true
+                @roomId = cu.room_id
+              end
+            end
+          end
+          unless @isRoom
+            @room = Room.new
+            @entry = Entry.new
+          end
+    end
   end
+
+
 
 
 
@@ -56,6 +86,8 @@ class BooksController < ApplicationController
     @books.destroy
     redirect_to books_path
   end
+
+
 
   private
 

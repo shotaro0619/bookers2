@@ -18,37 +18,12 @@
          </div>
             <div class="col-md-8 offset-md-1">
               <h2>Books</h2>
-              <table class="table table-hover table-inverse">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Title</th>
-                    <th>Opinion</th>
-                    <th>Category</th>
-                    <th colspan="3"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @books.each do |book| %>
-                  <tr>
-                    <td>
-                      <%= link_to user_path(book.user) do %>
-                       <%= attachment_image_tag book.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %>
-                      <% end %>
-                    </td>
-                    <td><%= link_to book.title, book %></td>
-                    <td><%= book.body %></td>
-                    <td><%= book.category %></td>
-
-                    <td id="book_<%= book.id %>">
-                     <%= render 'favorites/favorite-btn', book: book %>
-                    </td>
-                    <td>コメント数：<%= book.book_comments.count %></td>
-                    <td>閲覧数：<%= book.impressions_count %></td>
-                  </tr>
-                  <% end %>
-                </tbody>
-              </table>
+              <%= link_to "新着順", books_sort_path, remote: true %>||<%= link_to "いいね多い順", books_like_path, remote: true %>
+              
+            <div id="books_index">
+              <%= render 'index', books: @books %>
+           </div>
+                
             </div>
      　 </div>
     </div>

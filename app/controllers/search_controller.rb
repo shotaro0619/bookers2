@@ -6,8 +6,13 @@ class SearchController < ApplicationController
     @how = params[:how]
     @datas = search_for('partical', @model, @value)
   end
+  
+  def Book.search(search_word)
+    Book.where(['category LIKE ?', "#{search_word}"])
+  end
 
    private
+
 
   def perfect_match(model, value)
     if model == 'user'
