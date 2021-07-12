@@ -19,14 +19,14 @@
           <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %>
           <small></small><strong><a href="/users/<%= m.user_id %>"><%= m.user.name %></a></strong></small>
           <strong><%= m.content %></strong>
-          <hr>
+
         </div>
         <% else %>
          <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %>
           <small><strong><a href="/users/<%= m.user_id %>"><%= m.user.name %>さん</a></strong></small>
           <strong><%= m.content %></strong>
           <%= m.created_at.strftime('%Y/%m/%d') %>
-          <hr>
+
       <% end %>
       <% end %>
     <% else %>

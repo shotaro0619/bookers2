@@ -7,9 +7,6 @@ class SearchController < ApplicationController
     @datas = search_for('partical', @model, @value)
   end
   
-  def Book.search(search_word)
-    Book.where(['category LIKE ?', "#{search_word}"])
-  end
 
    private
 

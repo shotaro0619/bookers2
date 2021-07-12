@@ -1,5 +1,5 @@
-<main>
-     <p id="notice"></p>
+<main class="back">
+  　<div class="bg-mask">
      <div class="container px-5 px-sm-0">
        <%if @book.errors.any? %>
          <div class="error_explanation">
@@ -19,12 +19,13 @@
             <div class="col-md-8 offset-md-1">
               <h2>Books</h2>
               <%= link_to "新着順", books_sort_path, remote: true %>||<%= link_to "いいね多い順", books_like_path, remote: true %>
-              
+
             <div id="books_index">
               <%= render 'index', books: @books %>
            </div>
-                
+
             </div>
      　 </div>
     </div>
+  </div>
 </main>
