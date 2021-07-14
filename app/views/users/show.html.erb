@@ -33,6 +33,26 @@
                    </tbody>
                <% end %>
             </table>
+            <table class="table table-dark table-striped">
+                <tr>
+                    <th>今日の投稿数</th>
+                    <th>前日の投稿数</th>
+                    <th>前日比</th>
+                </tr>
+                <tr>
+                    <td><%= current_user.books.where('created_at > ?', Time.zone.now.beginning_of_day).count %></td>
+                    <td><%= current_user.books.where(created_at: 1.day.ago.all_day).count %></td>
+                    <td>
+                        <% if current_user.books.where(created_at: 1.day.ago.all_day).count == 0 %>
+                         前日の投稿が0のため計算できません
+                        <% else %>
+                         <% @the_day_before = current_user.books.where(created_at: 1.day.ago.all_day).count / current_user.books.where('created_at > ?', Time.zone.now.beginning_of_day).count %>
+                         <%= (@the_day_before * 100).round %>%
+                        <% end %>
+                    </td>
+                </tr>
+            </table>
+
          </div>
        </div>
      </div>

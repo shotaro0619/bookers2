@@ -8,14 +8,15 @@ class BooksController < ApplicationController
     # @books = Book.all.order(created_at: :desc)
   # end
     @user = current_user
+    @users = User.all
     # @books_all = Book.all
     @books_search= Book.all.order(params[:sort])
   end
-  
+
   def sort
     @books = Book.all.order(created_at: :desc)
   end
-  
+
   def like
     @books = Book.where(:created_at=> 6.weeks.ago..Time.now).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
   end
