@@ -15,16 +15,15 @@
       <hr>
       <% if current_user.id == m.user.id %>
         <div class="text-right mr-5">
+          <div class="talk2"><strong><%= m.content %></strong></div>
           <%= m.created_at.strftime('%Y/%m/%d') %>
-          <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %>
-          <small></small><strong><a href="/users/<%= m.user_id %>"><%= m.user.name %></a></strong></small>
-          <strong><%= m.content %></strong>
-
+          <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40', class:"pro_photo" %>
+          <small><strong><a href="/users/<%= m.user_id %>"><%= m.user.name %></a></strong></small>
         </div>
         <% else %>
-         <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %>
+         <%= attachment_image_tag m.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40', class:"pro_photo" %><br>
           <small><strong><a href="/users/<%= m.user_id %>"><%= m.user.name %>さん</a></strong></small>
-          <strong><%= m.content %></strong>
+          <div class="talk"><strong><%= m.content %></strong></div>
           <%= m.created_at.strftime('%Y/%m/%d') %>
 
       <% end %>
